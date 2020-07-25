@@ -1,0 +1,109 @@
+from tkinter import *
+import random
+import time
+
+'''The below function is to swap the balls/wigets on the canvas'''
+
+def swap_wiget(a,b):
+    x_00, _, x_01, _ = canvas.coords(a)
+    x_10, _, x_11, _ = canvas.coords(b)
+    
+    for i in range(round(x_00-x_10)):
+        canvas.move(b,1,0)
+        canvas.move(a,-1,0)
+        tk.update()
+        time.sleep(0.005)
+        
+'''The below swap function is to swap elements in the list. '''
+def swap_list(l,a,b):
+    temp1 = l.index(a)
+    temp2 = l.index(b)
+    temp3 = l[temp1]
+    l[temp1]=l[temp2]
+    l[temp2]=temp3
+    
+'''We actually sort the l2 list but during the process of swapping we swap both the canvas balls as well as list elements'''
+def selection_sort(dummy_list,actual_val):
+    for i in range(len(dummy_list)-1):
+        tk.update()
+        time.sleep(0.7)
+        x = dummy_list[i]
+        y = min([dummy_list[j] for j in range(i+1,len(dummy_list))])
+
+        c = len(dummy_list)-(i+2)
+
+        for  i in range(c,0,-1):
+            tk.update()
+            time.sleep(1)
+            canvas.move(line2,80,0)
+            tk.update()
+
+        time.sleep(0.7)
+
+        if x>y:
+            swap_list(dummy_list,x,y)           #swapping elements of the list
+            swap_wiget(actual_val[y],actual_val[x])   #swapping balls in the canvas
+
+        canvas.move(line2,-80*c+80,0)   
+        canvas.move(line1,80,0)
+    
+
+
+if __name__=="__main__":
+    
+    tk = Tk()
+    canvas = Canvas(tk,bg = "white",width=1350,height =720)
+    tk.title("Drawing")
+    canvas.pack()
+    
+    ball1 = canvas.create_oval(20,20,40,40,fill="red")
+    ball2 = canvas.create_oval(18.75,18.75,42.5,42.5,fill="grey")
+    ball3 = canvas.create_oval(17.5,17.5,45,45,fill="green")
+    ball4 = canvas.create_oval(16.25,16.25,47.25,47.25,fill="purple")
+    ball5 = canvas.create_oval(15,15,50,50,fill="yellow")
+    ball6 = canvas.create_oval(13.75,13.75,52.5,52.5,fill="pale green")
+    ball7 = canvas.create_oval(12.5,12.5,55,55,fill="black")
+    ball8 = canvas.create_oval(11.25,11.25,57.5,57.5,fill="orange2")
+    ball9 = canvas.create_oval(10,10,60,60,fill="pink")
+    ball10 = canvas.create_oval(8.75,8.75,62.5,62.5,fill="SteelBlue1")
+    ball11 = canvas.create_oval(7.5,7.5,65,65,fill="cyan")
+    ball12 = canvas.create_oval(6.25,6.25,67.5,67.5,fill="bisque2")
+    ball13 = canvas.create_oval(5,5,70,70,fill="blue")
+    ball14 = canvas.create_oval(3.75,3.75,72.5,72.5,fill="chocolate1")
+    
+    line1 = canvas.create_rectangle(10,100,15,40,fill="SpringGreen2")
+    line2 = canvas.create_rectangle(10,100,15,40,fill="gold")
+    
+    canvas.move(ball7,90,300)
+    canvas.move(ball12,170,300)
+    canvas.move(ball3,250,300)
+    canvas.move(ball4,330,300)
+    canvas.move(ball2,410,300)
+    canvas.move(ball10,490,300)
+    canvas.move(ball13,570,300)
+    canvas.move(ball1,650,300)
+    canvas.move(ball14,730,300)
+    canvas.move(ball5,810,300)
+    canvas.move(ball8,890,300)
+    canvas.move(ball6,970,300)
+    canvas.move(ball11,1050,300)
+    canvas.move(ball9,1130,300)
+
+
+
+    canvas.move(line1,110,180)
+    canvas.move(line2,190,360)
+    
+    tk.update()
+    
+    actual_val = {7:ball7,12:ball12,3:ball3,4:ball4,2:ball2,
+                  10:ball10,13:ball13,1:ball1,14:ball14,5:ball5,8:ball8,
+                  6:ball6,11:ball11,9:ball9}
+
+
+    dummy_list= [7,12,3,4,2,10,13,1,14,5,8,6,11,9]  
+    
+    selection_sort(dummy_list,actual_val)
+    
+    tk.mainloop()
+    
